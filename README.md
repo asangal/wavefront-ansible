@@ -84,17 +84,21 @@ Go to the folder where `wavefront-ansible.yml` file is present, then:
 $ ansible-playbook -i "`hostname`," --connection=local wavefront-ansible.yml --extra-vars "wavefront_install_proxy=true wavefront_api_token=dummy012-f223-11cf-789c-T0kenOfWFUrl"
 ```
 
-OR 
-(See: `<role>/parent_folder_contents/README.md` file and try that way) 
-if OS is RedHat/CentOS, you want to install proxy agent for (https://try.wavefront.com), and have `localhost` mentioned in a custom inventory file, then run:
+OR
+
+PS: `<role>/parent_folder_contents/README.md` file and try that way.
+
+If OS is RedHat/CentOS, you want to install proxy agent for (https://try.wavefront.com), and have `localhost` mentioned in a custom inventory file, then run:
 
 ```
 $ ansible-playbook -i inventory -l localhost wavefront-ansible.yml --extra-vars "instance=try wavefront_install_proxy=true wavefront_api_token=dummy012-f223-11cf-789c-T0kenOfWFUrl" --tags "redhat"
 ```
 
 OR 
-(See: `<role>/parent_folder_contents/README.md` file and try that way) 
-if you also want to create the '~/.wavefront/credentials' file and if the OS is Debian/Ubuntu: 
+
+PS: `<role>/parent_folder_contents/README.md` file and try that way.
+
+If you also want to create the '~/.wavefront/credentials' file and if the OS is Debian/Ubuntu, then run: 
 
 ```
 $ ansible-playbook -i inventory -l localhost wavefront-ansible.yml --extra-vars "wavefront_create_cred_file=true wavefront_install_proxy=true wavefront_api_token=dummy012-f223-11cf-789c-T0kenOfWFUrl" --tags "debian"
@@ -107,8 +111,10 @@ $ ansible-playbook -i "`hostname`," --connection=local wavefront-ansible.yml --e
 ```
 
 OR 
-(See: `<role>/parent_folder_contents/README.md` file and try that way) 
-if OS is Debian/Ubuntu and and have `localhost` mentioned in a custom inventory file, then run:
+
+PS: `<role>/parent_folder_contents/README.md` file and try that way.
+
+If OS is Debian/Ubuntu and and have `localhost` mentioned in a custom inventory file, then run:
 
 ```
 $ansible-playbook -i inventory -l localhost wavefront-ansible.yml --extra-vars "wavefront_install_collector=true proxy_address=my-valid-wavefront-proxy-server-host.com proxy_port=2878" --tags "debian"
