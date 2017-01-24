@@ -44,27 +44,44 @@ The following tags are supported, can be given comma separated (for ex: --tags "
 
 How To Install
 ----------------
-Download from: https://github.com/asangal/ansible_wavefront_proxy_telegraf/archive/master.zip
-
-Coming soon:
 Using ansible galaxy, best for ad-hoc command situations:
 
-    $ ansible-galaxy install wavefront.wavefront-ansible
+    $ ansible-galaxy install asangal.wavefront-ansible
 
 To install into your playbook roles, use `-p ROLES_PATH` or `--path=ROLES_PATH`
 
-    $ ansible-galaxy install wavefront.wavefront-ansible -p /your/project/root/roles
+    $ ansible-galaxy install asangal.wavefront-ansible -p /your/project/root/roles
 
 Check out: [Advanced Control over Role Requirements Files](http://docs.ansible.com/galaxy.html#advanced-control-over-role-requirements-files)
+
+
+Basic Setup (playbook)
+----------------------
+
+Create a playbook (yml) file. For ex: `wavefront-ansible.yml`:
+
+```
+---
+# See Role's (asangal.wavefront-ansible) README file for more info on parameters.
+
+- hosts: all
+  gather_facts: true
+  remote_user: root
+  become: true
+  roles:
+    - { role: asangal.wavefront-ansible, wavefront_install_collector: "true", proxy_address: "localhost" }
+    #- { role: asangal.wavefront-ansible, wavefront_install_collector: "true", proxy_address: "<a_proxy_host_for_sending_data_to_wavefront_instance>" }
+```
+
 
 Examples
 ----------------
 1) To install Wavefront Proxy agent (local machine): Go to the folder where 'wavefront-ansible.yml' file is present, then run:
 ```
-$ ansible-playbook -i inventory -l localhost wavefront-ansible.yml --extra-vars "wavefront_install_proxy=true wavefront_api_token=dummy012-f223-11cf-789c-T0kenOfWFUrl"
+$ ansible-playbook -i "`hostname`," --connection=local wavefront-ansible.yml --extra-vars "wavefront_install_proxy=true wavefront_api_token=dummy012-f223-11cf-789c-T0kenOfWFUrl"
 ```
 
-OR if you know the OS is RedHat/CentOS and you want to install proxy agent on https://try.wavefront.com, then run:
+OR if OS is RedHat/CentOS, you want to install proxy agent on (https://try.wavefront.com), and have `localhost` mentioned in a custom inventory file, then run:
 ```
 $ ansible-playbook -i inventory -l localhost wavefront-ansible.yml --extra-vars "instance=try wavefront_install_proxy=true wavefront_api_token=dummy012-f223-11cf-789c-T0kenOfWFUrl" --tags "redhat"
 ```
@@ -76,10 +93,10 @@ $ ansible-playbook -i inventory -l localhost wavefront-ansible.yml --extra-vars 
 
 2) To install Wavefront Collector agent (Telegraf) on a (local machine). 
 ```
-$ ansible-playbook -i inventory -l localhost wavefront-ansible.yml --extra-vars "wavefront_install_collector=true proxy_address=my-valid-wavefront-proxy-server-host.com proxy_port=2878"
+$ ansible-playbook -i "`hostname`," --connection=local wavefront-ansible.yml --extra-vars "wavefront_install_collector=true proxy_address=my-valid-wavefront-proxy-server-host.com proxy_port=2878"
 ```
 
-OR if you know the OS is Debian/Ubuntu based, then run:
+OR if you know the OS is Debian/Ubuntu based and and have `localhost` mentioned in a custom inventory file, then run:
 ```
 $ansible-playbook -i inventory -l localhost wavefront-ansible.yml --extra-vars "wavefront_install_collector=true proxy_address=my-valid-wavefront-proxy-server-host.com proxy_port=2878" --tags "debian"
 ```
@@ -142,5 +159,5 @@ Apache 2.0
 
 Author Information
 ------------------
-Wavefront Ops <ops@wavefront.com>
+Arun Sangal <arun@wavefront.com>
 Use github issues for bugs in this repo.
