@@ -15,8 +15,8 @@ Role Variables
 --------------
 The following variables are available for override.
 ```
-instance: try (default: mon).                                    # Optional. Instance name
-wavefront_api_url: https://mon.wavefront.com (default)           # Optional. WaveFront URL
+instance: <wavefront_instance_name> (default: try)               # Optional. Instance name
+wavefront_api_url: https://try.wavefront.com (default)           # Optional. WaveFront URL
 wavefront_api_token: xx1122ZZ3344111_GIVE_A_VALID_API_T0KEN      # Optional. Your API Key
 wavefront_install_proxy=true (default: false)                    # Optional.
 wavefront_install_collector=true (default: false)                # Optional.
